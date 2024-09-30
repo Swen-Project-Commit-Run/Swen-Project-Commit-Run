@@ -5,4 +5,4 @@ from App.database import db
 def initialize():
     db.drop_all()
     db.create_all()
-    create_user('bob', 'email@email.com', 'bobpass')
+    create_user('bob', 'boy', 'email@email.com', 'bobpass')

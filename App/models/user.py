@@ -3,7 +3,8 @@ from App.database import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username =  db.Column(db.String(40), nullable=False, unique=True)
+    firstName =  db.Column(db.String(40), nullable=False)
+    lastName = db.Column(db.String(40), nullable=False)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
     role = db.Column(db.String(9), nullable=False)
@@ -13,8 +14,9 @@ class User(db.Model):
         'polymorphic_on': role
     }
 
-    def __init__(self, username, email, password):
-        self.username = username
+    def __init__(self, firstName, lastName, email, password):
+        self.firstName = firstName
+        self.lastName = lastName
         self.set_password(password)
         self.email=email
 

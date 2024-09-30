@@ -31,7 +31,8 @@ user_cli = AppGroup('user', help='User object commands')
 
 # Then define the command and any parameters and annotate it with the group (@)
 @user_cli.command("create", help="Creates a user")
-@click.argument("username", default="rob")
+@click.argument("firstName", default="rob")
+@click.argument("lastName", default="man")
 @click.argument("email", default="rob@email.com")
 @click.argument("password", default="robpass")
 def create_user_command(username, email, password):
@@ -63,6 +64,21 @@ def create_applicant_command(username, email, password):
     print(f'{username} created!')
 
 app.cli.add_command(applicant_cli) # add the group to the cli
+
+'''
+admin commands
+'''
+admin_cli = AppGroup('admin', help='Applicant object commands')
+@applicant_cli.command("create", help="creates an applicant")
+@click.argument("username", default="unemployed")
+@click.argument("email", default="unemployed@email.com")
+@click.argument("password", default="robpass")
+def create_applicant_command(username, email, password):
+    create_applicant(username, email, password)
+    print(f'{username} created!')
+
+app.cli.add_command(applicant_cli) # add the group to the cli
+
 '''
 Test Commands
 '''

@@ -1,12 +1,12 @@
 from App.database import db
 
 
-class JobListing(db.model):
-    __tablename__ = 'job_listings'
-    id= db.Column(db.Interger, primary_key=True)
+class JobListing(db.Model):
+    __tablename__ = 'job_listing'
+    id= db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
-    description = db.Column(db.text, nullable=False)
-    employerId = db.column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    employerId = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     employer = db.relationship('Employer', backref='job_listings')
 

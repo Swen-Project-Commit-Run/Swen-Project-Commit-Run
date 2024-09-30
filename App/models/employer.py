@@ -9,8 +9,8 @@ class Employer(User):
 
     organization = db.Column(db.String(150), nullable=False)
 
-    def __init__(self, username, email, password, organization):
-        super().__init__(username, email, password)
+    def __init__(self, firstName, lastName, email, password, organization):
+        super().__init__(firstName, lastName, email, password)
         self.organization = organization
 
     def get_jason(self):

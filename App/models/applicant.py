@@ -7,8 +7,8 @@ class Applicant(User):
         'polymorphic_identity' : "job_applicant"
     }
 
-    def __init__(self, username, email, password):
-        super().__init__(username, email, password)
+    def __init__(self, firstName, lastName, email, password):
+        super().__init__(firstName, lastName, email, password)
         
 
     
