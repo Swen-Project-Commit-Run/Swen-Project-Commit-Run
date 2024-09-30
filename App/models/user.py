@@ -6,11 +6,18 @@ class User(db.Model):
     username =  db.Column(db.String(40), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
+    role = db.Column(db.String(9), nullable=False)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'User',
+        'polymorphic_on': role
+    }
 
     def __init__(self, username, email, password):
         self.username = username
         self.set_password(password)
         self.email=email
+        self.role='User'
 
     def get_json(self):
         return{
