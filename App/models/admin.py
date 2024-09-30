@@ -9,6 +9,6 @@ class Admin(User):
 
     def __init__(self, username, email, password):
         super().__init__(username, email, password)
-        self.role='Admin'
+        
 
     #uses same json from user

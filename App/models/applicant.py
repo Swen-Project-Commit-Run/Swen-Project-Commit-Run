@@ -8,7 +8,7 @@ class Applicant(User):
     }
 
     def __init__(self, username, email, password):
-        super().__init_(username, email, password)
-        self.role='Applicant'
+        super().__init__(username, email, password)
+        
 
     

@@ -7,10 +7,6 @@ def create_user(username, email, password):
     db.session.commit()
     return newuser
 
-#temp may have to move to applicant.py file vvv#
-def create_applicant(username, email, password):
-    newApplicant = Applicant(username=username, email=email, password=password)
-##
 
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
