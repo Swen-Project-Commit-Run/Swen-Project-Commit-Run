@@ -8,7 +8,7 @@ class JobListing(db.Model):
     description = db.Column(db.Text, nullable=False)
     employerId = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
-    employer = db.relationship('Employer', backref='job_listings')
+    job_applications = db.relationship('JobApplication', backref='job_listing', cascade="all, delete", lazy=True)
 
     def __init__(self, title, description, employerId):
         self.title = title

@@ -7,13 +7,8 @@ class Employer(User):
         'polymorphic_identity': 'employer',
     }
 
-    organization = db.Column(db.String(150), nullable=False)
+    job_listings = db.relationship('JobListing', backref='employer', cascade="all, delete", lazy=True)
 
-    def __init__(self, firstName, lastName, email, password, organization):
+
+    def __init__(self, firstName, lastName, email, password):
         super().__init__(firstName, lastName, email, password)
-        self.organization = organization
-
-    def get_jason(self):
-        data = super().get_json()
-        data['organization'] = self.organization
-        return data
