@@ -13,4 +13,7 @@ class Employer(User):
         super().__init__(username, email, password)
         self.organization = organization
 
-    #maybe do json
+    def get_jason(self):
+        data = super().get_json()
+        data['organization'] = self.organization
+        return data
