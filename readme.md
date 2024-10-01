@@ -38,7 +38,7 @@ apply the applicant with that id to the job with that job listing id
 ```bash
 $ flask applicant view_jobs
 ```
-shows all avilable jobs
+shows all available jobs
 
 =========================================================================================
 
