@@ -27,7 +27,7 @@ $ flask admin create <first name> <last name> <email> <password>
 creates the respective user
 
 ```bash
-$ flask applicant apply <applicantid, joblistingid>
+$ flask applicant apply <applicantid> <joblistingid>
 ```
 apply the applicant with that id to the job with that job listing id
 
@@ -37,7 +37,7 @@ $ flask applicant view_jobs
 shows all avilable jobs
 
 ```bash
-$ flask employer create_listing <title> "<description>" <employerId>
+$ flask employer create_listing <title> <"description"> <employerId>
 ```
 will make a job listing tied to that employer id (the quotation marks are needed for desccription)
 
