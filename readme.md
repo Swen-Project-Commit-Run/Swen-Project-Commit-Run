@@ -18,12 +18,12 @@ Job board using this template [Demo](https://dcit-flaskmvc.herokuapp.com/). [Pos
 $ pip install -r requirements.txt
 ```
 # Commands
-'''bash
+```bash
 $ flask user create <first name> <last name> <email> <password>
 $ flask applicant create <first name> <last name> <email> <password>
 $ flask employer create <first name> <last name> <email> <password>
 $ flask admin create <first name> <last name> <email> <password>
-'''
+```
 creates the respective user
 
 ```bash
