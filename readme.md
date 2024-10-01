@@ -5,8 +5,8 @@
 
 ![Tests](https://github.com/uwidcit/flaskmvc/actions/workflows/dev.yml/badge.svg)
 
-# Flask MVC Template
-A template for flask applications structured in the Model View Controller pattern [Demo](https://dcit-flaskmvc.herokuapp.com/). [Postman Collection](https://documenter.getpostman.com/view/583570/2s83zcTnEJ)
+# Job-Board
+Job board using this template [Demo](https://dcit-flaskmvc.herokuapp.com/). [Postman Collection](https://documenter.getpostman.com/view/583570/2s83zcTnEJ)
 
 
 # Dependencies
@@ -17,6 +17,52 @@ A template for flask applications structured in the Model View Controller patter
 ```bash
 $ pip install -r requirements.txt
 ```
+# Commands
+'''bash
+$ flask user create <first name> <last name> <email> <password>
+$ flask applicant create <first name> <last name> <email> <password>
+$ flask employer create <first name> <last name> <email> <password>
+$ flask admin create <first name> <last name> <email> <password>
+'''
+creates the respective user
+
+'''bash
+$ flask applicant apply <applicantid, joblistingid>
+'''
+apply the applicant with that id to the job with that job listing id
+
+'''bash
+$ flask applicant view_jobs
+'''
+shows all avilable jobs
+
+'''bash
+$ flask employer create_listing <title> "<description>" <employerId>
+'''
+will make a job listing tied to that employer id (the quotation marks are needed for desccription)
+
+'''bash
+$ flask employer view_all_applicants <employerId>
+'''
+will show all applicants that applied for all the jobs created by the employer with that id
+
+'''bash
+$ flask employer view_job_applicants <jobId>
+'''
+shows all applicant that applied to the job with that job id
+
+'''bash
+$ flask admin remove_user <id>
+'''
+remove user with that id
+
+'''bash
+$flask remove_listing <listing_id>
+'''
+remove listing with that id
+
+
+
 
 # Configuration Management
 
@@ -120,74 +166,6 @@ $ flask db upgrade
 $ flask db --help
 ```
 
-# Testing
 
-## Unit & Integration
-Unit and Integration tests are created in the App/test. You can then create commands to run them. Look at the unit test command in wsgi.py for example
 
-```python
-@test.command("user", help="Run User tests")
-@click.argument("type", default="all")
-def user_tests_command(type):
-    if type == "unit":
-        sys.exit(pytest.main(["-k", "UserUnitTests"]))
-    elif type == "int":
-        sys.exit(pytest.main(["-k", "UserIntegrationTests"]))
-    else:
-        sys.exit(pytest.main(["-k", "User"]))
-```
 
-You can then execute all user tests as follows
-
-```bash
-$ flask test user
-```
-
-You can also supply "unit" or "int" at the end of the comand to execute only unit or integration tests.
-
-You can run all application tests with the following command
-
-```bash
-$ pytest
-```
-
-## Test Coverage
-
-You can generate a report on your test coverage via the following command
-
-```bash
-$ coverage report
-```
-
-You can also generate a detailed html report in a directory named htmlcov with the following comand
-
-```bash
-$ coverage html
-```
-
-# Troubleshooting
-
-## Views 404ing
-
-If your newly created views are returning 404 ensure that they are added to the list in main.py.
-
-```python
-from App.views import (
-    user_views,
-    index_views
-)
-
-# New views must be imported and added to this list
-views = [
-    user_views,
-    index_views
-]
-```
-
-## Cannot Update Workflow file
-
-If you are running into errors in gitpod when updateding your github actions file, ensure your [github permissions](https://gitpod.io/integrations) in gitpod has workflow enabled ![perms](./images/gitperms.png)
-
-## Database Issues
-
-If you are adding models you may need to migrate the database with the commands given in the previous database migration section. Alternateively you can delete you database file.
