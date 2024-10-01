@@ -26,56 +26,56 @@ $ flask admin create <first name> <last name> <email> <password>
 ```
 creates the respective user
 
-=========================================================================================
+===========================================================================
 
 ```bash
 $ flask applicant apply <applicantid> <joblistingid>
 ```
 apply the applicant with that id to the job with that job listing id
 
-=========================================================================================
+===========================================================================
 
 ```bash
 $ flask applicant view_jobs
 ```
 shows all available jobs
 
-=========================================================================================
+===========================================================================
 
 ```bash
 $ flask employer create_listing <title> <"description"> <employerId>
 ```
 will make a job listing tied to that employer id (the quotation marks are needed for desccription)
 
-=========================================================================================
+===========================================================================
 
 ```bash
 $ flask employer view_all_applicants <employerId>
 ```
 will show all applicants that applied for all the jobs created by the employer with that id
 
-=========================================================================================
+===========================================================================
 
 ```bash
 $ flask employer view_job_applicants <jobId>
 ```
 shows all applicant that applied to the job with that job id
 
-=========================================================================================
+===========================================================================
 
 ```bash
 $ flask admin remove_user <id>
 ```
 remove user with that id
 
-=========================================================================================
+===========================================================================
 
 ```bash
 $flask remove_listing <listing_id>
 ```
 remove listing with that id
 
-=========================================================================================
+===========================================================================
 # Configuration Management
 
 
