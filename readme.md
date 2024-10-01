@@ -26,39 +26,39 @@ $ flask admin create <first name> <last name> <email> <password>
 '''
 creates the respective user
 
-'''bash
+```bash
 $ flask applicant apply <applicantid, joblistingid>
-'''
+```
 apply the applicant with that id to the job with that job listing id
 
-'''bash
+```bash
 $ flask applicant view_jobs
-'''
+```
 shows all avilable jobs
 
-'''bash
+```bash
 $ flask employer create_listing <title> "<description>" <employerId>
-'''
+```
 will make a job listing tied to that employer id (the quotation marks are needed for desccription)
 
-'''bash
+```bash
 $ flask employer view_all_applicants <employerId>
-'''
+```
 will show all applicants that applied for all the jobs created by the employer with that id
 
-'''bash
+```bash
 $ flask employer view_job_applicants <jobId>
-'''
+```
 shows all applicant that applied to the job with that job id
 
-'''bash
+```bash
 $ flask admin remove_user <id>
-'''
+```
 remove user with that id
 
-'''bash
+```bash
 $flask remove_listing <listing_id>
-'''
+```
 remove listing with that id
 
 
