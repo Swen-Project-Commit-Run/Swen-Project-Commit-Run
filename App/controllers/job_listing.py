@@ -1,5 +1,5 @@
 from App.database import db
-from models import Employer,JobListing
+from App.models import Employer,JobListing
 
 
 def CreateJobListing(employee_id,title,description):

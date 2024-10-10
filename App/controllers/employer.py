@@ -32,7 +32,7 @@ def get_job_listings(employer_id):
     if employer is None:
         raise ValueError(f"Employer with ID {employer_id} does not exist.")
 
-    if employer.job_listings is None:
-        return employer.job_listings
+    if employer.jobListings is None:
+        return employer.jobListings
     else:
         return []

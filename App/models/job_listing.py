@@ -5,13 +5,12 @@ class JobListing(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     employer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=True)
+    company_id = db.Column(db.Integer, db.ForeignKey('companies.id'), nullable=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
 
-    employer = db.relationship('Employer', backref='job_listings')
-    company = db.relationship('Company', backref='job_listings',cascade="all, delete", lazy=True)
-    job_applications = db.relationship('AppliedForJobs', backref='job_listing', cascade="all, delete", lazy=True)
+    
+    job_applicants = db.relationship('Job_Applicant', secondary='applied_for_job',backref=db.backref('job_listings', cascade="all, delete", lazy=True))
 
     def __init__(self, employer_id, title, description, company_id=None):
         self.employer_id = employer_id
@@ -20,4 +19,4 @@ class JobListing(db.Model):
         self.company_id = company_id  # Optional: can be None if not provided
 
     def list_applicants(self):
-        return self.applicants
+        return self.job_applicants

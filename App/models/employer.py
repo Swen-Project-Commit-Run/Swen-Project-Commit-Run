@@ -8,8 +8,9 @@ class Employer(User):
     }
 
     id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
-    company_id = db.Column(db.Integer,db.ForeignKey('company.id'))
-    company = db.relationship('Company', backref='employers')
+    company_id = db.Column(db.Integer,db.ForeignKey('companies.id'))
+    created_companies = db.relationship('Company', backref='creator',foreign_keys='Company.creator_id')
+    jobListings = db.relationship('JobListing', backref='employer')
     def __init__(self, firstname, lastname, email, username, password):
         super().__init__(firstname, lastname, email, username, password)
     
