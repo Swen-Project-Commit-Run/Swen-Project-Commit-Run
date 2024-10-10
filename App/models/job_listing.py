@@ -5,7 +5,7 @@ class JobListing(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     employer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=True)
+    company_id = db.Column(db.Integer, db.ForeignKey('companies.id'), nullable=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
 
@@ -20,4 +20,4 @@ class JobListing(db.Model):
         self.company_id = company_id  # Optional: can be None if not provided
 
     def list_applicants(self):
-        return self.applicants
+        return self.job_applicants

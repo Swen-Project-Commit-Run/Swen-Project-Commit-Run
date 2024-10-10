@@ -4,6 +4,7 @@ from .user import User
 from sqlalchemy.dialects.postgresql import JSON
 
 class Job_Applicant(User):
+    __tablename__='jobapplicant'
     __mapper_args__ = {
         'polymorphic_identity': "job_applicant"
     }
