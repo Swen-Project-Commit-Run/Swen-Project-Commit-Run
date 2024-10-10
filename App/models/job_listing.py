@@ -9,7 +9,7 @@ class JobListing(db.Model):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
 
-    employer = db.relationship('Employer', backref='job_listings')
+    #employer = db.relationship('Employer', backref='job_listings')
     company = db.relationship('Company', backref='job_listings',cascade="all, delete", lazy=True)
     job_applications = db.relationship('AppliedForJobs', backref='job_listing', cascade="all, delete", lazy=True)
 
