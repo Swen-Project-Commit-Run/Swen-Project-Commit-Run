@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 from.index import index_views
 
 from App.controllers import (
-    create_user,
+   ## create_user,
     get_all_users,
     get_all_users_json,
     jwt_required
@@ -21,7 +21,7 @@ def get_user_page():
 def create_user_action():
     data = request.form
     flash(f"User {data['username']} created!")
-    create_user(data['username'], data['password'])
+   ## create_user(data['username'], data['password'])
     return redirect(url_for('user_views.get_user_page'))
 
 @user_views.route('/api/users', methods=['GET'])

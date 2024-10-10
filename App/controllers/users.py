@@ -1,11 +1,17 @@
 from App.models import User
 from App.database import db
+from sqlalchemy.exc import IntegrityError
 
-def create_user(firstName, lastName, email, password):
-    newuser = User(firstName=firstName, lastName=lastName, email=email, password=password)
-    db.session.add(newuser)
-    db.session.commit()
-    return newuser
+def create_user(firstName, lastName, email, username ,password):
+    newuser = User(firstName,lastName,email,username,password)
+    try:
+        db.session.add(newuser)
+        db.session.commit()
+    except IntegrityError as e:
+        db.session.rollback()
+        return None
+    else:
+        return newuser
 
 
 def get_user_by_username(username):

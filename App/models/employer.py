@@ -7,8 +7,11 @@ class Employer(User):
         'polymorphic_identity': 'employer',
     }
 
-    job_listings = db.relationship('JobListing', backref='employer', cascade="all, delete", lazy=True)
+    id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
+    company_id = db.Column(db.Integer,db.ForeignKey('company.id'))
 
-
-    def __init__(self, firstName, lastName, email, password):
-        super().__init__(firstName, lastName, email, password)
+    def __init__(self, firstname, lastname, email, username, password):
+        super().__init__(firstname, lastname, email, username, password)
+    
+    def AttachCompany(self,id):
+        self.company_id = id

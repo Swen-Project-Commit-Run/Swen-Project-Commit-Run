@@ -3,8 +3,8 @@ from App.models import User
 from App.models import JobListing
 from App.database import db
 
-def create_admin(firstName, lastName, email, password):
-    newuser = Admin(firstName=firstName, lastName=lastName, email=email, password=password)
+def create_admin(firstName, lastName, email,username, password):
+    newuser = Admin(firstName, lastName, email,username, password)
     db.session.add(newuser)
     db.session.commit()
     return newuser

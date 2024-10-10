@@ -7,8 +7,8 @@ class Admin(User):
         'polymorphic_identity' : 'admin',
     }
 
-    def __init__(self, firstName, lastName, email, password):
-        super().__init__(firstName, lastName, email, password)
+    def __init__( self, firstname, lastname, email, username, password):
+        super().__init__(firstname, lastname, email, username, password)
         
 
     #uses same json from user
