@@ -8,3 +8,6 @@ class AppliedForJobs(db.Model):
     applicant_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     
+    def __init__(self,job_id,applicant_id):
+        self.job_id = job_id
+        self.applicant_id = applicant_id
