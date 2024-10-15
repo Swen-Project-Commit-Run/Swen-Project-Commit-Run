@@ -17,13 +17,13 @@ def create_Company(employer_id, companyName):
         return newcompany
 
 
-def list_CompanyEmployees(companyName):
+def list_CompanyJobLisings(companyName):
     _company = Company.query.filter_by(name = companyName)
     if _company is None:
         return None
     
-    employees = _company.employers
-    if employees is None:
+    jobListing = _company.jobListings
+    if jobListing is None:
         return []
     else :
-        return employees
+        return jobListing
