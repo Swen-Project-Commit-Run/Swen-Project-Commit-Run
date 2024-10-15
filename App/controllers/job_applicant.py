@@ -13,6 +13,10 @@ def create_job_applicant(firstName, lastName, email, username ,password):
     else:
         return newuser
     
+def get_job_listings():
+    job_listings = JobListing.query.all()
+    return job_listings
+    
 
 def apply_job(job_applicant_id, job_listing_id):
     jobapplicant = JobListing.query.get(job_applicant_id)

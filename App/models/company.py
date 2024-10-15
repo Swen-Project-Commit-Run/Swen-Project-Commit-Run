@@ -1,5 +1,5 @@
 from App.database import db
-from App.models.employer import Employer
+#from App.models.employer import Employer
 
 class Company(db.Model):
     __tablename__ = 'companies'
@@ -8,8 +8,8 @@ class Company(db.Model):
     name = db.Column(db.String(100),nullable=True)
     jobListings = db.relationship('JobListing',backref='company',lazy=True)
 
-    def __init__(self, name, creator):
-        if not isinstance(creator, Employer):
-            raise ValueError("Only an Employer can create a company.")
-        self.name = name
-        self.creator_id = creator.id
+    # def __init__(self, name, creator):
+    #     if not isinstance(creator, Employer):
+    #         raise ValueError("Only an Employer can create a company.")
+    #     self.name = name
+    #     self.creator_id = creator.id

@@ -9,8 +9,9 @@ class JobListing(db.Model):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
 
-    
-    job_applicants = db.relationship('Job_Applicant', secondary='applied_for_job',backref=db.backref('job_listings', cascade="all, delete", lazy=True))
+    #employer = db.relationship('Employer', backref='job_listings')
+    company = db.relationship('Company', backref='job_listings',cascade="all, delete", lazy=True)
+    job_applications = db.relationship('AppliedForJobs', backref='job_listing', cascade="all, delete", lazy=True)
 
     def __init__(self, employer_id, title, description, company_id=None):
         self.employer_id = employer_id
