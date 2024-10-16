@@ -11,7 +11,12 @@ class Job_Applicant(User):
 
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     qualifications = db.Column(JSON)
-    applied_for_jobs = db.relationship('JobListing', secondary='applied_for_job', backref=db.backref('applicants', lazy=True))
+    applied_for_jobs = db.relationship(
+        'JobListing',
+        secondary='applied_for_job',
+        backref=db.backref('applicants', lazy=True, cascade='all, delete'),
+    )
+
 
     def __init__(self, firstname, lastname, email, username, password):
         super().__init__(firstname, lastname, email, username, password)

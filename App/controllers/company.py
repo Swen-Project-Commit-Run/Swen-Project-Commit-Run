@@ -1,24 +1,13 @@
 from App.database import db
 from App.models import Company
-from App.models.job_listing import JobListing
+from App.models import JobListing,Employer
 from sqlalchemy.exc import IntegrityError
 
-# def create_Company(employer_id, companyName):
-#     employer = Employer.query.get(employer_id)
-#     if employer is None:
-#         return None
-#     newcompany = Company(companyName,employer)
-#     try:
-#         db.session.add(newcompany)
-#         db.session.commit()
-#     except IntegrityError as e:
-#         db.session.rollback()
-#         return None
-#     else:
-#         return newcompany
-
-def create_Company(companyName):
-    newcompany = Company(companyName)
+def create_Company(employer_id, companyName):
+    employer = Employer.query.get(employer_id)
+    if employer is None:
+        return None
+    newcompany = Company(companyName,employer)
     try:
         db.session.add(newcompany)
         db.session.commit()
@@ -27,6 +16,8 @@ def create_Company(companyName):
         return None
     else:
         return newcompany
+
+
 
 
 def list_CompanyJobLisings(companyName):
