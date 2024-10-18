@@ -37,7 +37,7 @@ def view_applicants_for_jobListing(jobListing_id):
         else:
             print(f"Applicant with ID {application.applicant_id} not found.")
 
-    return
+    return job_applications
 
 
 
