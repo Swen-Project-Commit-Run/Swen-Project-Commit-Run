@@ -4,18 +4,29 @@ from App.models import JobListing,Employer
 from sqlalchemy.exc import IntegrityError
 
 def create_Company(employer_id, companyName):
+    print(f"Fetching employer with ID: {employer_id}")
     employer = Employer.query.get(employer_id)
+    print(f"Retrieved employer: {employer}")
+
+
     if employer is None:
+        print("employer not found")
         return None
-    newcompany = Company(companyName,employer)
+    
+    newcompany = Company(companyName, employer)
+    employer.AttachCompany(newcompany.id)  # Attach the company to the employer
+
     try:
         db.session.add(newcompany)
-        db.session.commit()
+        db.session.commit()  # Commit the new company to the database
+        print("Company was added!")
     except IntegrityError as e:
         db.session.rollback()
+        print("Company was NOT added!")
         return None
-    else:
-        return newcompany
+    
+    return newcompany
+
 
 
 
