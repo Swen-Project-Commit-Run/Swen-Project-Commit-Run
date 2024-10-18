@@ -1,21 +1,23 @@
-from flask import Flask, render_template, request, redirect, flash, jsonify
-from flask_jwt_extended import JWTManager, jwt_required, current_user, unset_jwt_cookies, set_access_cookies
-from flask_admin import Admin
-from App.database import db
-from App.models import Employer, JobListing
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required  # Import here
 from App.controllers.job_listing import CreateJobListing, view_applicants_for_jobListing
 
-app= Flask(__name__)
-app.config['JWT_SECRET_KEY'] = 'super-secret'  # Change this!
-jwt = JWTManager(app)
+listing_views = Blueprint('listing_views', __name__)
 
-@app.route('/' , methods=['GET'])
-@jwt_required()
-def get_job_listings():
-    job_listings = JobListing.query.all()
-    job_listings_data = [
+@listing_views.route('/job/create', methods=['POST'])
+@jwt_required()  # Protect this route
+def create_job_listing_view():
+    data = request.json
+    try:
+        job = CreateJobListing(data.get('employer_id'), data.get('title'), data.get('description'))
+        return jsonify(job.get_json()), 201
+    except ValueError as e:
+        return jsonify({'message': str(e)}), 400
 
-        {'id': job_listings.id, 'employer_id': job_listings.employer_id, 'title': job_listings.title, 'description': job_listings.description} for job_listings in job_listings
-    ]
-    return jsonify(job_listings_data), 200
-    #return render_template('job_listings.html', job_listings=job_listings)
+@listing_views.route('/job/applicants/<int:job_listing_id>', methods=['GET'])
+def view_applicants_for_job_listing_view(job_listing_id):
+    try:
+        applicants = view_applicants_for_jobListing(job_listing_id)
+        return jsonify([applicant.get_json() for applicant in applicants]), 200
+    except ValueError as e:
+        return jsonify({'message': str(e)}), 404

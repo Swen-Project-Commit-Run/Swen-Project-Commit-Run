@@ -1,32 +1,38 @@
-from flask import Flask, request, jsonify
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token
-from App.database import db
-from App.models import Job_Applicant, JobListing, AppliedForJobs
-from App.controllers.job_applicant import create_job_applicant, apply_job
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required  # Import here
+from App.controllers.job_applicant import create_job_applicant, apply_job, get_job_listings
 
+applicant_views = Blueprint('applicant_views', __name__)
 
-app = Flask(__name__)
-app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Change this to a random secret
-jwt = JWTManager(app)
-
-@app.route('/api/register', methods=['POST'])
-def register():
+@applicant_views.route('/applicant/create', methods=['POST'])
+@jwt_required()  # Protect this route
+def create_applicant_view():
     data = request.json
-    new_user = create_job_applicant(data['firstName'], data['lastName'], data['email'], data['username'], data['password'])
-    if new_user:
-        return jsonify({"msg": "User registered successfully"}), 201
-    else:
-        return jsonify({"msg": "User registration failed"}), 400
+    applicant = create_job_applicant(
+        data.get('firstName'), 
+        data.get('lastName'), 
+        data.get('email'), 
+        data.get('username'), 
+        data.get('password')
+    )
+    
+    if applicant:
+        return jsonify(applicant.get_json()), 201
+    return jsonify({'message': 'Error creating applicant'}), 400
 
-@app.route('/api/apply', methods=['POST'])
-@jwt_required()
-def apply():
+@applicant_views.route('/applicant/apply', methods=['POST'])
+@jwt_required()  # Protect this route
+def apply_job_view():
     data = request.json
-    result = apply_job(data['job_applicant_id'], data['job_listing_id'])
-    if result:
-        return jsonify({"msg": "Applied to job successfully"}), 200
-    else:
-        return jsonify({"msg": "Application failed"}), 400
+    applicant_id = data.get('applicant_id')
+    job_listing_id = data.get('job_listing_id')
+    
+    applied = apply_job(applicant_id, job_listing_id)
+    if applied:
+        return jsonify({'message': 'Application successful'}), 201
+    return jsonify({'message': 'Error applying for job'}), 400
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@applicant_views.route('/job/listings', methods=['GET'])
+def get_job_listings_view():
+    job_listings = get_job_listings()
+    return jsonify([job.get_json() for job in job_listings]), 200
