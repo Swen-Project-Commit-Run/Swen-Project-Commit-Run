@@ -26,14 +26,13 @@ from App.views.index import index_views
 
 def add_views(app):
     # Registering individual blueprints
-    # app.register_blueprint(auth_views, url_prefix='/auth')
-    app.register_blueprint(auth_views, url_prefix='/auth_views')
-    app.register_blueprint(admin_views, url_prefix='/admin_views')
-    app.register_blueprint(company_views, url_prefix='/company')
-    app.register_blueprint(listing_views, url_prefix='/job')
-    app.register_blueprint(applicant_views, url_prefix='/applicant')
-    app.register_blueprint(user_views, url_prefix='/user')
-    app.register_blueprint(index_views)  # No prefix for the index
+    app.register_blueprint(auth_views)
+    app.register_blueprint(admin_views)
+    app.register_blueprint(company_views)
+    app.register_blueprint(listing_views)
+    app.register_blueprint(applicant_views)
+    app.register_blueprint(user_views)
+    app.register_blueprint(index_views)
 
 def create_app(overrides={}):
     app = Flask(__name__, static_url_path='/static')
