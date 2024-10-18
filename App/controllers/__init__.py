@@ -5,3 +5,4 @@ from .users import *
 from .employer import *
 from .job_listing import *
 from .company import *
+from .job_applicant import *
