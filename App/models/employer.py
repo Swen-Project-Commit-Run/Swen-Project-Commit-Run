@@ -13,5 +13,5 @@ class Employer(User):
     def __init__(self, firstname, lastname, email, username, password):
         super().__init__(firstname, lastname, email, username, password)
     
-#     def AttachCompany(self,id):
-#         self.company_id = id
+    def AttachCompany(self,id):
+        self.company_id = id

@@ -8,12 +8,15 @@ class User(db.Model):
         lastname = db.Column(db.String(50),nullable=False)
         username = db.Column(db.String(50),unique=True,nullable=False)
         password = db.Column(db.String(128),nullable = False)
+        role = db.Column(db.String(9), nullable=False)
 
         type = db.Column(db.String(50))
         
         __mapper_args__ = {
-            'polymorphic_on': type
-            }
+        'polymorphic_identity': 'User',
+        'polymorphic_on': role
+        
+        }
 
         def __init__(self, firstname, lastname, email, username, password):
             self.firstname = firstname
